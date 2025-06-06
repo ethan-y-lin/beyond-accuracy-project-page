@@ -54,31 +54,33 @@
           <div class="column has-text-centered">
             <h1 class="title is-1 publication-title">Beyond Accuracy: Metrics that Uncover What Makes a 'Good' Visual Descriptor</h1>
             <div class="is-size-5 publication-authors">
-              <!-- Paper authors -->
+              <!-- Paper authors with superscript affiliations -->
               <span class="author-block">
-                  <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Ethan Lin</a><sup>*</sup>,
+                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Ethan Lin</a><sup>1</sup>,
               </span>
               <span class="author-block">
-                  <a href="https://linxi-zhao.github.io/" target="_blank">Linxi Zhao</a>,
+                <a href="https://linxi-zhao.github.io/" target="_blank">Linxi Zhao</a><sup>1</sup>,
               </span>
               <span class="author-block">
-                  <a href="https://atharvas.net/" target="_blank">Atharva Sehgal</a>
+                <a href="https://atharvas.net/" target="_blank">Atharva Sehgal</a><sup>2</sup>,
               </span>
               <span class="author-block">
-                  <a href="https://jenjsun.com/" target="_blank">Jennifer J. Sun</a>
+                <a href="https://jenjsun.com/" target="_blank">Jennifer J. Sun</a><sup>1</sup>
               </span>
             </div>
 
-                  <div class="is-size-5 publication-authors">
-                    <span class="author-block">Cornell University<br>VisCon @ CVPR 2025</span>
-                    <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
-                  </div>
+            <div class="is-size-5 publication-authors">
+              <!-- Affiliations -->
+              <span class="author-block"><sup>1</sup> Cornell University</span><br>
+              <span class="author-block"><sup>2</sup> University of Texas at Austin</span><br>
+              <span class="author-block">VisCon @ CVPR 2025</span>
+            </div>
 
                   <div class="column has-text-centered">
                     <div class="publication-links">
                          <!-- Arxiv PDF link -->
                       <span class="link-block">
-                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                        <a href="https://openreview.net/pdf/d4e4323197ac1c3472b6f953f0550ef72842938b.pdf" target="_blank"
                         class="external-link button is-normal is-rounded is-dark">
                         <span class="icon">
                           <i class="fas fa-file-pdf"></i>
@@ -88,7 +90,7 @@
                     </span>
 
                     <!-- Supplementary PDF link -->
-                    <span class="link-block">
+                    <!-- <span class="link-block">
                       <a href="static/pdfs/supplementary_material.pdf" target="_blank"
                       class="external-link button is-normal is-rounded is-dark">
                       <span class="icon">
@@ -96,11 +98,11 @@
                       </span>
                       <span>Supplementary</span>
                     </a>
-                  </span>
+                  </span> -->
 
                   <!-- Github link -->
                   <span class="link-block">
-                    <a href="https://github.com/YOUR REPO HERE" target="_blank"
+                    <a href="https://github.com/ethan-y-lin/beyond_accuracy" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
@@ -116,7 +118,7 @@
                   <span class="icon">
                     <i class="ai ai-arxiv"></i>
                   </span>
-                  <span>arXiv</span>
+                  <span>arXiv (Coming Soon)</span>
                 </a>
               </span>
             </div>
@@ -134,11 +136,11 @@
     <div class="hero-body">
       <video poster="" id="tree" autoplay controls muted loop height="100%">
         <!-- Your video here -->
-        <source src="static/videos/banner_video.mp4"
-        type="video/mp4">
+        <source src="static/pdfs/fig_concept_main.pdf"
+        type="image/pdf">
       </video>
       <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
+        Achieving high accuracy does not guarantee that a set of descriptors is ``good''. Other factors like interpretability may suffer. Global alignment and CLIP similarity can serve as new metrics for evaluating and understanding different sets of visual descriptors. 
       </h2>
     </div>
   </div>
@@ -153,7 +155,14 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue, a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
+            Text-based visual descriptors—ranging from simple class names to more descriptive phrases—are widely used in visual concept discovery and 
+            image classification with vision-language models (VLMs). Their effectiveness, however, depends on a complex interplay of factors, including semantic clarity, 
+            presence in the VLM's pre-training data, and how well the descriptors serve as a meaningful representation space. In this work, 
+            we systematically analyze descriptor quality along two key dimensions: (1) representational capacity, and (2) relationship with 
+            VLM pre-training data. We evaluate a spectrum of descriptor generation methods, from zero-shot LLM-generated prompts to iteratively refined descriptors. 
+            Motivated by ideas from representation alignment and language understanding, we introduce two alignment-based metrics—Global Alignment and 
+            CLIP Similarity—that move beyond accuracy. These metrics allow us to shed light on how different descriptor generation strategies interact 
+            with foundation model properties, offering insights into ways of studying descriptor effectiveness beyond accuracy evaluations.
           </p>
         </div>
       </div>
