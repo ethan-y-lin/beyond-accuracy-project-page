@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
-  <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="DESCRIPTION META TAG">
-  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
-  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
-  <meta property="og:url" content="URL OF THE WEBSITE"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <meta property="og:image" content="static/image/your_banner_image.png" />
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
+<meta charset="utf-8">
 
+<!-- Search Engine Description -->
+<meta name="description" content="A study of visual descriptor quality using CLIP Similarity and Global Alignment metrics. Evaluates descriptor alignment with CLIP’s training distribution.">
 
-  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
-  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <!-- Keywords for your paper to be indexed by-->
-  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Open Graph for social media (Facebook, LinkedIn, etc.) -->
+<meta property="og:title" content="Beyond Accuracy: Evaluating Visual Descriptors with CLIP Similarity" />
+<meta property="og:description" content="We introduce new metrics—Global Alignment and CLIP Similarity—to evaluate the quality of text-based visual descriptors in VLMs." />
+<meta property="og:url" content="https://ethan-y-lin.github.io/beyond-accuracy-project-page/" />
+<meta property="og:image" content="static/images/fig_concept_main.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter Card Meta -->
+<meta name="twitter:title" content="Evaluating Visual Descriptors in CLIP" />
+<meta name="twitter:description" content="New metrics for analyzing visual concept quality using vision-language models like CLIP." />
+<meta name="twitter:image" content="static/images/fig_concept_main.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Keywords for search indexing -->
+<meta name="keywords" content="CLIP, vision-language models, visual descriptors, zero-shot learning, ESCHER, representation alignment, CLIP Similarity" />
+
+<!-- Viewport settings for responsiveness -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 
   <title>Beyond Accuracy: Metrics that Uncover What Makes a 'Good' Visual Descriptor</title>
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <!-- <link rel="icon" type="image/x-icon" href="static/images/favicon.ico"> -->
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
 
@@ -330,7 +334,7 @@
 
       </div>
       <div class="container" style="text-align: center;">
-        <h4 class="title">Global Alignment Method</h4>
+        <h4 class="title is-4">Global Alignment Method</h4>
 
         <figure style="margin: 0 auto; max-width: 80%;">
           <img 
@@ -481,6 +485,7 @@
         </div>
       </div>
     </div>
+    </br>
     <div class="container">
       <h2 class="title is-4">
         Does an iterative algorithm like ESCHER converge towards descriptors that align with CLIP's vision-language priors?
@@ -489,19 +494,19 @@
         
         <!-- CIFAR-100 -->
         <div style="text-align: center; max-width: 30%;">
-          <h4 class="subtitle is-3"><strong>CIFAR-100</strong></h4>
+          <h4 class="subtitle is-5"><strong>CIFAR100</strong></h4>
           <img src="static/images/sim_iteration_cifar100.png" alt="CIFAR100 CLIP Similarity vs. Accuracy" style="width: 100%; height: auto;">
         </div>
 
         <!-- CUB -->
         <div style="text-align: center; max-width: 30%;">
-          <h4 class="subtitle is-3"><strong>CUB</strong></h4>
+          <h4 class="subtitle is-5"><strong>CUB</strong></h4>
           <img src="static/images/sim_iteration_cub.png" alt="CUB CLIP Similarity vs. Accuracy" style="width: 100%; height: auto;">
         </div>
 
         <!-- NABirds -->
         <div style="text-align: center; max-width: 30%;">
-          <h4 class="subtitle is-3"><strong>NABirds</strong></h4>
+          <h4 class="subtitle is-5"><strong>NABirds</strong></h4>
           <img src="static/images/sim_iteration_nabirds.png" alt="NABirds CLIP Similarity vs. Accuracy" style="width: 100%; height: auto;">
         </div>
 
@@ -524,7 +529,7 @@
     <div class="container">
       <h2 class="title">Poster</h2>
 
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
+      <iframe  src="static/pdfs/beyond_accuracy_poster.pdf" width="100%" height="550">
           </iframe>
         
       </div>
