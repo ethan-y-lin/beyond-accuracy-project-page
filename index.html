@@ -71,7 +71,7 @@
 
             <div class="is-size-5 publication-authors">
               <!-- Affiliations -->
-              <span class="author-block"><sup>1</sup> Cornell University</span><br>
+              <span class="author-block"><sup>1</sup> Cornell University</span>,
               <span class="author-block"><sup>2</sup> University of Texas at Austin</span><br>
               <span class="author-block">VisCon @ CVPR 2025</span>
             </div>
@@ -134,13 +134,26 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <video poster="" id="tree" autoplay controls muted loop height="100%">
-        <!-- Your video here -->
-        <source src="static/pdfs/fig_concept_main.pdf"
+      <!-- <video poster="" id="tree" autoplay controls muted loop height="100%">
+        Your video here -->
+        <!-- <source src="static/pdfs/fig_concept_main.pdf"
         type="image/pdf">
-      </video>
+      </video> -->
+      <img 
+        src="static/images/fig_concept_main.png" 
+        alt="Concept figure"
+        style="
+          display: block;
+          margin: 0 auto 1rem;
+          max-width: 80%;
+          height: auto;
+        "
+      >
       <h2 class="subtitle has-text-centered">
-        Achieving high accuracy does not guarantee that a set of descriptors is ``good''. Other factors like interpretability may suffer. Global alignment and CLIP similarity can serve as new metrics for evaluating and understanding different sets of visual descriptors. 
+        Achieving high accuracy does not guarantee that a set of descriptors is "good". 
+        Other factors like interpretability may suffer. <b>Global Alignment</b> and 
+        <b>CLIP Similarity</b> can serve as new metrics for evaluating and 
+        understanding different sets of visual descriptors. 
       </h2>
     </div>
   </div>
@@ -171,110 +184,342 @@
 </section>
 <!-- End paper abstract -->
 
-
-<!-- Image carousel -->
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel1.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
+      <h3 class="title">Which descriptor set is best?</h3>
+      <ul style="
+        max-width: 100%;
+        margin: 0 auto;
+        padding-left: 0;
+        list-style-type: none;
+        font-size: 1.2rem;  /* Increase font size (e.g., ~20px) */
+        line-height: 1.6;    /* Optional: improves readability */
+      ">
+        <li><strong>Class Name Prompt</strong>: Uses the standard zero-shot image classification format “An image of a {class name}”.</li>
+        <li><strong>CBD Concepts</strong>: LLM-generated descriptors from the original Classification by Description framework.</li>
+        <li><strong>ESCHER</strong>: Iteratively refined class-specific descriptors using the ESCHER algorithm.</li>
+        <li><strong>DCLIP</strong>: Inspired by WaffleCLIP; combines class names with randomly sampled global descriptors.</li>
+        <li><strong>WaffleCLIP</strong>: Appends randomized tokens to general concepts and class names, e.g., “An image of a {concept}: {class name}, which has !32d, #tjli, ^fs0.”</li>
+      </ul>
+      <!-- Button -->
+      <button id="performance-button" onclick="togglePerformance()">Show Performance</button>
+
+      <!-- Image container -->
+      <div id="performance-container">
+        <img 
+          id="performance-img"
+          src="static/images/cub_accuracy.png" 
+          alt="Concept figure"
+        >
       </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="MY ALT TEXT"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
+
+      <!-- Style -->
+      <style>
+        #performance-button {
+          display: block;
+          margin: 1rem auto;
+          padding: 0.5rem 1rem;
+          font-size: 2.0rem;
+          background-color: #3273dc;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        #performance-button:hover {
+          background-color: #275fbd; /* darker blue on hover */
+        }
+
+        #performance-container {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.5s ease-out;
+          text-align: center;
+        }
+
+        #performance-img {
+          max-width: 80%;
+          height: auto;
+          margin-bottom: 1rem;
+        }
+      </style>
+
+      <!-- Script -->
+      <script>
+        let isVisible = false;
+
+        function togglePerformance() {
+          const container = document.getElementById('performance-container');
+          const button = document.getElementById('performance-button');
+
+          if (isVisible) {
+            container.style.maxHeight = '0';
+            button.textContent = 'Show Performance';
+          } else {
+            container.style.maxHeight = container.scrollHeight + 'px';
+            button.textContent = 'Hide Performance';
+          }
+
+          isVisible = !isVisible;
+        }
+      </script>
+      <p>
+        Descriptor quality is typically evaluated based on downstream 
+        classification accuracy. While informative, this metric offers limited insight
+        into why certain descriptors succeed or fail, and provides
+        little guidance for descriptor discovery or refinement. 
+        Moreover, higher accuracy does not necessarily
+        imply more meaningful descriptors. As shown above, random descriptors generation methods
+        can outperform zero-shot LLM-generation methods like the original Classification by Description method or
+        even an iterative refinement algorithm like ESCHER. Even though the semantic quality of the random descriptors is much 
+        worse, they still have better accuracy. Clearly, there is need for more principled methods to assess 
+        descriptor quality beyond accuracy.
+      </p>
     </div>
   </div>
-</div>
-</div>
 </section>
-<!-- End image carousel -->
-
-
-
-
-<!-- Youtube video -->
-<section class="hero is-small is-light">
+<section class="hero is-light">
   <div class="hero-body">
     <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Video Presentation</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          
-          <div class="publication-video">
-            <!-- Youtube embed code here -->
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <h3 class="title">Contributions</h3>
+      <p>
+        In this work, we propose a novel approach to assessing descriptor quality by probing the relationship between
+        textual descriptors and the underlying VLM. We design two new metrics:
+      </p>
+
+      <div style="margin-top: 1.5rem; ">
+        <p style="font-size: 1.3rem; margin-bottom: 0.75rem;">
+          1) <b>Global Alignment:</b> Measures the representational capacity of a set of descriptors.
+        </p>
+        <p style="font-size: 1.3rem; margin-bottom: 0.75rem;">
+          2) <b>CLIP Similarity:</b> Measures how well a set of descriptors aligns with the VLM's pre-training data.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero">
+    <div class="hero-body">
+      <div class="container" style="display: flex; align-items: top; gap: 2rem; flex-wrap: wrap;">
+        
+        <!-- Text Content -->
+        <div style="flex: 1; min-width: 300px;">
+          <h3 class="title">Global Alignment</h3>
+          <p>
+            Classification by description using VLMs can be viewed
+            as a semantic projection, where images are mapped
+            to similarity scores over a set of textual descriptors. This
+            forms a new <b>representation space</b>, with each dimension corresponding to a specific concept. 
+            Conceptually, this resembles principal component analysis, where we aim to find a set 
+            of bases in the form of natural language.
+          </p>
+          <p>
+            <b>Global Alignment</b> evaluates the quality of this descriptor space by using metrics from previous work in <b>representational alignment</b>. 
+            We measure the Mutual-KNN alignment between the visual descriptor space to a strong reference image embedding space. A high alignment value indicates that the 
+            descriptors capture meaningful visual structure which likely corresponds to high semantic quality.
+          </p>
+        </div>
+
+        <!-- Image -->
+        <div style="flex: 1; min-width: 300px; text-align: center;">
+          <img src="static/images/semantic_proj_fig.png" alt="Semantic Projection" style="max-width: 80%; height: auto;">
+        </div>
+
+      </div>
+      <div class="container" style="text-align: center;">
+        <h4 class="title">Global Alignment Method</h4>
+
+        <figure style="margin: 0 auto; max-width: 80%;">
+          <img 
+            src="static/images/Global_Alignment_Method.png" 
+            alt="Global Alignment Method" 
+            style="width: 100%; height: auto; display: block; margin: 0 auto;"
+          >
+          <figcaption style="font-size: 1rem; margin-top: 0.5rem; color: #555;">
+            Our alignment metric compares neighborhood structure between the projections of a dataset into descriptor and 
+            image embedding spaces.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+</section>
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h4 class="title">Global Alignment Results</h4>
+      We compute the alignment and accuracy across three-different datasets that are commonly used in Classification by Description frameworks. While there is no
+      clear trend in accuracy across the different sets of descriptors, alignment shows a clear trend in representation quality across the different types of descriptor sets.
+      <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+        <img src="static/images/nabirds_alignment_vs_accuracy.png" alt="NABirds Alignment vs. Accuracy" style="max-width: 30%; height: auto;">
+        <img src="static/images/cifar100_alignment_vs_accuracy.png" alt="CIFAR100 Alignment vs. Accuracy" style="max-width: 30%; height: auto;">
+        <img src="static/images/cub_alignment_vs_accuracy.png" alt="CUB Alignment vs. Accuracy" style="max-width: 30%; height: auto;">
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title"> CLIP Similarity </h2>
+      <figure style="margin: 0 auto; max-width: 80%;">
+        <img 
+          src="static/images/CLIP_SIM.png" 
+          alt="CLIP Similarity Metric" 
+          style="width: 100%; height: auto; display: block; margin: 0 auto;"
+        >
+        <figcaption style="font-size: 1rem; margin-top: 0.5rem; color: #555;">
+          <b>CLIP Similarity</b> assesses how well descriptors align with visual content by retrieving 
+          related image-text pairs from CLIP’s pre-training dataset and averaging their similarity scores.
+        </figcaption>
+      </figure>
+    </br>
+      <p>
+        Due to the imbalanced nature of CLIP’s training data, semantically similar text descriptors may not yield similar downstream performance. 
+        To analyze this, we propose <strong>CLIP Similarity</strong>, a metric that measures how well descriptor candidates align with CLIP's pre-training data.
+      </p>
+    </br>
+      <figure style="margin: 0 auto; max-width: 80%;">
+        <img 
+          src="static/images/Clip_Similarity_Method.png" 
+          alt="CLIP Similarity Method" 
+          style="width: 100%; height: auto; display: block; margin: 0 auto;"
+        >
+        <figcaption style="font-size: 1rem; margin-top: 0.5rem; color: #555;">
+          Diagram of how the CLIP Similarity metric is computed given a set of descriptors and CLIP's pre-training data. 
+        </figcaption>
+      </figure>
+      </br>
+      <p>
+        We define two statistics for each descriptor \( d \), based on its top-\( k \) nearest captions \( \{c_1, \dots, c_k\} \) 
+        retrieved by cosine similarity in CLIP’s text embedding space. Let \( \text{sim}(a, b) \) denote cosine similarity between two L2-normalized embeddings.
+      </p>
+
+      <ul style="margin-top: 1rem;">
+        <li style="margin-bottom: 1rem;">
+          <strong>Frequency:</strong> number of captions above a similarity threshold \( \tau \):
+          <div>
+            \[
+            \mathcal{I}_d = \left\{ i \in [k] \mid \text{sim}(d, c_i) > \tau \right\}, \quad
+            \text{Freq}(d) = |\mathcal{I}_d|
+            \]
           </div>
+        </li>
+
+        <li>
+          <strong>Similarity:</strong> average similarity between each matched caption \( c_i \) and its paired image \( I_i \):
+          <div>
+            \[
+            \text{Sim}(d) = \frac{1}{|\mathcal{I}_d|} \sum_{i \in \mathcal{I}_d} \text{sim}(c_i, I_i)
+            \]
+          </div>
+        </li>
+      </ul>
+
+      <p>
+        These two metrics capture how frequently a text descriptor appears in CLIP’s training 
+        set and how well it aligns with visual content. This provides a proxy for how 
+        compatible a descriptor is with CLIP’s vision-language representation space.
+        High-quality descriptors should not only distinguish between image classes but 
+        also align with the inductive biases learned by VLMs. Such descriptors are more likely 
+        to yield better downstream performance.
+      </p>
+
+      <p><strong>CLIP Similarity Score:</strong> Average similarity across all descriptors:
+        <div>
+          \[
+          \text{CLIP Similarity} = \frac{1}{|\mathcal{D}|} \sum_{d \in \mathcal{D}} \text{Sim}(d)
+          \]
         </div>
-      </div>
+      </p>
     </div>
   </div>
 </section>
-<!-- End youtube video -->
-
-
-<!-- Video carousel -->
-<section class="hero is-small">
+<section class="hero is-light">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
+      <h4 class="title">CLIP Similarity Results</h4>
+      <p>
+        To build intuition about CLIP’s priors, we first analyze
+        the relationship between descriptor frequency and CLIP
+        similarity. As shown below, we observe a <b>consistent
+        negative correlation between frequency and image-text similarity</b>—a somewhat counterintuitive trend. 
+        One possible explanation is that frequent descriptors tend to be coarser
+        and more ambiguous (e.g., “animal”), making it harder for CLIP to associate them with a consistent visual pattern. In
+        contrast, rarer descriptors often refer to more specific, visually grounded concepts that CLIP can align with more
+        reliably.
+      </p>
+    </div>
+    <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4"
-            type="video/mp4">
-          </video>
+        <div class="item">
+          <h2 class="title is-4"> <strong>Frequency</strong> vs. <strong>CLIP Similarity</strong> on NABirds</h2>
+          <!-- Your image here -->
+          <img src="static/images/frequency_vs_clip_sim_nabirds.png" alt="MY ALT TEXT"/>
+          <h2 class="subtitle has-text-centered">
+            Distribution of descriptors by frequency and corresponding CLIP Similarity on the <strong>NABirds</strong> dataset.
+          </h2>
         </div>
-        <div class="item item-video2">
-          <video poster="" id="video2" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4"
-            type="video/mp4">
-          </video>
+        <div class="item">
+          <h2 class="title is-4"> <strong>Frequency</strong> vs. <strong>CLIP Similarity</strong> on CIFAR100</h2>
+          <!-- Your image here -->
+          <img src="static/images/frequency_vs_clip_sim_cifar100.png" alt="MY ALT TEXT"/>
+          <h2 class="subtitle has-text-centered">
+            Distribution of descriptors by frequency and corresponding CLIP Similarity on the <strong>CIFAR100</strong> dataset.
+          </h2>
         </div>
-        <div class="item item-video3">
-          <video poster="" id="video3" autoplay controls muted loop height="100%">\
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4"
-            type="video/mp4">
-          </video>
+        <div class="item">
+          <h2 class="title is-4"> <strong>Frequency</strong> vs. <strong>CLIP Similarity</strong> on CUB</h2>
+          <!-- Your image here -->
+          <img src="static/images/frequency_vs_clip_sim_cub.png" alt="MY ALT TEXT"/>
+          <h2 class="subtitle has-text-centered">
+          Distribution of descriptors by frequency and corresponding CLIP Similarity on the <strong>CUB</strong> dataset.
+          </h2>
         </div>
       </div>
     </div>
+    <div class="container">
+      <h2 class="title is-4">
+        Does an iterative algorithm like ESCHER converge towards descriptors that align with CLIP's vision-language priors?
+      </h2>
+      <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem;">
+        
+        <!-- CIFAR-100 -->
+        <div style="text-align: center; max-width: 30%;">
+          <h4 class="subtitle is-3"><strong>CIFAR-100</strong></h4>
+          <img src="static/images/sim_iteration_cifar100.png" alt="CIFAR100 CLIP Similarity vs. Accuracy" style="width: 100%; height: auto;">
+        </div>
+
+        <!-- CUB -->
+        <div style="text-align: center; max-width: 30%;">
+          <h4 class="subtitle is-3"><strong>CUB</strong></h4>
+          <img src="static/images/sim_iteration_cub.png" alt="CUB CLIP Similarity vs. Accuracy" style="width: 100%; height: auto;">
+        </div>
+
+        <!-- NABirds -->
+        <div style="text-align: center; max-width: 30%;">
+          <h4 class="subtitle is-3"><strong>NABirds</strong></h4>
+          <img src="static/images/sim_iteration_nabirds.png" alt="NABirds CLIP Similarity vs. Accuracy" style="width: 100%; height: auto;">
+        </div>
+
+      </div>
+
+      <p style="margin-top: 2rem;">
+        We use CLIP Similarity to evaluate whether or not descriptor refinement moves toward CLIP’s training distribution.
+        The figure above shows how descriptor quality evolves over iterations of ESCHER. Across all datasets, 
+        CLIP Similarity generally increases across ESCHER iterations even when accuracy does not. <b>This suggests that descriptors 
+        become increasingly fine-grained and better aligned with CLIP's representation space.</b>
+      </p>
+    </div>
+
   </div>
+
 </section>
-<!-- End video carousel -->
-
-
-
-
-
-
 <!-- Paper poster -->
-<section class="hero is-small is-light">
+<section class="hero is-small">
   <div class="hero-body">
     <div class="container">
       <h2 class="title">Poster</h2>
